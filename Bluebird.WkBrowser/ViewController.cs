@@ -21,7 +21,10 @@ namespace Bluebird.WkBrowser
 			};
 			button.Activated += (object sender, EventArgs e) => m_webView.LoadRequest (new NSUrlRequest (new NSUrl (text.StringValue)));
 			split.AddSubview (button);
-			m_webView = new WKWebView(new CGRect(0.0f, 0.0f, 400.0f, 400.0f), new WKWebViewConfiguration());
+
+			var config = new WKWebViewConfiguration ();
+			config.Preferences.SetValueForKey(NSNumber.FromBoolean(true), new NSString("developerExtrasEnabled"));
+			m_webView = new WKWebView(new CGRect(0.0f, 0.0f, 400.0f, 400.0f), config);
 			split.AddSubview (m_webView);
 			View = split;
 		}
